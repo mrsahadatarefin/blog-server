@@ -39,7 +39,7 @@ exports.loginUser = async (req, res) => {
 
           process.env.JWT_SECRET,
           {
-            expiresIn: "1h",
+            expiresIn: "1d",
           }
         );
         res.status(200).json({
@@ -56,6 +56,33 @@ exports.loginUser = async (req, res) => {
         error: "authentication failure",
       });
     }
+  } catch {
+    res.status(401).json({
+      error: "authentication failure",
+    });
+  }
+};
+exports.allUsers = async (req, res) => {
+  try {
+    const allUsers = await User.find({});
+    res.status(200).json({
+      massage: "All User",
+      data: allUsers,
+    });
+  } catch {
+    res.status(500).json({
+      error: "There is server site error",
+    });
+  }
+};
+exports.singleUser = async (req, res) => {
+  try {
+    const { email } = req.query;
+    const user = await User.find({ email: email }).populate("myBlogs");
+    res.status(200).json({
+      massage: " single User",
+      data: user,
+    });
   } catch {
     res.status(401).json({
       error: "authentication failure",

@@ -43,3 +43,17 @@ exports.getAllBlogs = async (req, res) => {
     });
   }
 };
+exports.getSingleBlog = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const allBlogs = await Blog.findOne({ _id: id }).populate("user", "name");
+    res.status(200).json({
+      massage: " Blog ",
+      data: allBlogs,
+    });
+  } catch {
+    res.status(500).json({
+      error: "There is server site error",
+    });
+  }
+};
