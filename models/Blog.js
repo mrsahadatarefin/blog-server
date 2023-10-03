@@ -8,12 +8,12 @@ const blogSchema = mongoose.Schema(
     },
     title: {
       type: String,
-      required: [true, "please provide a  title"],
+      //   required: [true, "please provide a  title"],
       trim: true,
     },
     description: {
       type: String,
-      required: [true, "please provide a description"],
+      //   required: [true, "please provide a description"],
       trim: true,
     },
     // categories: [
@@ -28,15 +28,13 @@ const blogSchema = mongoose.Schema(
     //   },
     // ],
     user: {
-      id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
 
     imageUrl: {
       type: String,
-      require: [true, "please provide a imageUrl"],
+      //   require: [true, "please provide a imageUrl"],
     },
     createdAt: {
       type: Date,
